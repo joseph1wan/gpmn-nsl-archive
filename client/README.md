@@ -13,6 +13,11 @@ https://www.freecodecamp.org/news/how-to-configure-your-macos-terminal-with-zsh-
 https://github.com/lukechilds/zsh-nvm
 ```
 
+## Install Yarn
+```
+https://classic.yarnpkg.com/en/docs/install/#mac-stable
+```
+
 # Editor
 We’re going to use VS Code
 
@@ -21,7 +26,6 @@ https://code.visualstudio.com/download
 ```
 
 ## Plugins
-—
 
 ### Prettier - Code Formatter
 
