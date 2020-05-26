@@ -1,3 +1,34 @@
+# Setup
+
+# Terminal
+Bash is cool, but if you’re interested, follow this guide to super-power your terminal experience:
+
+```
+https://www.freecodecamp.org/news/how-to-configure-your-macos-terminal-with-zsh-like-a-pro-c0ab3f3c1156/
+```
+
+## Installing Node for ZSH
+
+```
+https://github.com/lukechilds/zsh-nvm
+```
+
+# Editor
+We’re going to use VS Code
+
+```
+https://code.visualstudio.com/download
+```
+
+## Plugins
+—
+
+### Prettier - Code Formatter
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
