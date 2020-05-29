@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import { useForm, Controller } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 const SignInScreen = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -51,6 +52,16 @@ const SignInScreen = () => {
 
           <Button variant="primary" type="submit" size="lg">
             Submit
+          </Button>
+
+          <Button
+            as={Link}
+            className="ml-3"
+            variant="secondary"
+            size="lg"
+            to="/"
+          >
+            Return Home
           </Button>
         </Form>
       </Container>
