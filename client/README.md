@@ -1,6 +1,7 @@
 # Setup
 
 # Terminal
+
 Bash is cool, but if you’re interested, follow this guide to super-power your terminal experience:
 
 ```
@@ -14,11 +15,13 @@ https://github.com/lukechilds/zsh-nvm
 ```
 
 ## Install Yarn
+
 ```
 https://classic.yarnpkg.com/en/docs/install/#mac-stable
 ```
 
 # Editor
+
 We’re going to use VS Code
 
 ```
@@ -29,9 +32,9 @@ https://code.visualstudio.com/download
 
 ### Prettier - Code Formatter
 
-
-
-
+```
+https://medium.com/technical-credit/using-prettier-with-vs-code-and-create-react-app-67c2449b9d08
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
