@@ -7,7 +7,7 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-      <div className="jumbotron">
+      <div className="jumbotron mb-0">
         <Container>
           <h1 className="display-4">Welcome to North Star Lodge</h1>
           <hr className="my-4" />
