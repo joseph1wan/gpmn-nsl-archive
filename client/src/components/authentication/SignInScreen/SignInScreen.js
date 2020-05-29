@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useForm, Controller } from 'react-hook-form';
 
 const SignInScreen = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const {
-      elements: {
-        signIn: { value: email },
-      },
-      password: { value: password },
-    } = event.target;
-    setCredentials({
-      email,
-      password,
-    });
+  const { handleSubmit, control } = useForm();
+
+  const onSubmit = (data) => {
+    setCredentials(data);
   };
   return (
     <React.Fragment>
@@ -29,16 +22,31 @@ const SignInScreen = () => {
           </code>
         </Container>
       </div>
+
       <Container className="w-50">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group controlId="signIn">
             <Form.Label>Email Addrress</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Controller
+              as={Form.Control}
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              control={control}
+              defaultValue=""
+            />
           </Form.Group>
 
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Controller
+              as={Form.Control}
+              type="password"
+              placeholder="Password"
+              name="password"
+              control={control}
+              defaultValue=""
+            />
           </Form.Group>
 
           <Button variant="primary" type="submit" size="lg">
