@@ -31,16 +31,10 @@ const GuestSignIn = ({ onSubmit: handleSubmit, control }) => {
           />
         </Form.Group>
         <Container className="text-center">
-          <Button className="mr-md-3" variant="primary" type="submit" size="lg">
+          <Button className="mr-md-3" variant="primary" type="submit">
             Submit
           </Button>
-          <Button
-            className="mt-3 mt-md-0"
-            as={Link}
-            variant="secondary"
-            size="lg"
-            to="/"
-          >
+          <Button className="mt-3 mt-md-0" as={Link} variant="secondary" to="/">
             Return Home
           </Button>
         </Container>
