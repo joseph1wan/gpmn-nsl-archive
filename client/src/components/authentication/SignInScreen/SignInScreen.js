@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Jumbotron } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const SignInScreen = () => {
   };
   return (
     <React.Fragment>
-      <div className="jumbotron">
+      <Jumbotron fluid className="px-3">
         <Container>
           <h1 className="display-4">Welcome to North Star Lodge</h1>
           <hr className="my-4" />
@@ -26,7 +26,7 @@ const SignInScreen = () => {
             <p>{credentials.password}</p>
           </code>
         </Container>
-      </div>
+      </Jumbotron>
       {method === 'gp' ? (
         <GPSignIn />
       ) : (

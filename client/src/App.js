@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Jumbotron } from 'react-bootstrap';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import logo from './assets/logo.svg';
 import './App.scss';
@@ -8,13 +8,13 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-      <div className="jumbotron jumbotron-fluid mb-0">
+      <Jumbotron className="px-3 mb-0" fluid>
         <Container>
           <h1 className="display-4">Welcome to North Star Lodge</h1>
           <hr className="my-4" />
           <p className="lead">Please select your authorization method below</p>
         </Container>
-      </div>
+      </Jumbotron>
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Button
