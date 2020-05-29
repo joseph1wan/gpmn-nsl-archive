@@ -30,14 +30,20 @@ const GuestSignIn = ({ onSubmit: handleSubmit, control }) => {
             defaultValue=""
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit" size="lg">
-          Submit
-        </Button>
-
-        <Button as={Link} className="ml-3" variant="secondary" size="lg" to="/">
-          Return Home
-        </Button>
+        <Container className="text-center">
+          <Button className="mr-md-3" variant="primary" type="submit" size="lg">
+            Submit
+          </Button>
+          <Button
+            className="mt-3 mt-md-0"
+            as={Link}
+            variant="secondary"
+            size="lg"
+            to="/"
+          >
+            Return Home
+          </Button>
+        </Container>
       </Form>
     </Container>
   );
