@@ -3,7 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-const GuestSignIn = ({ handleSubmit, control }) => {
+const GuestSignIn = ({ onSubmit: handleSubmit, control }) => {
   return (
     <Container className="w-50">
       <Form onSubmit={handleSubmit}>
