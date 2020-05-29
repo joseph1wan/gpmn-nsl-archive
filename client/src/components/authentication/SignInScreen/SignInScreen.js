@@ -5,45 +5,46 @@ const SignInScreen = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const email = form.elements.signIn.value;
-    const password = form.elements.password.value;
+    const {
+      elements: {
+        signIn: { value: email },
+      },
+      password: { value: password },
+    } = event.target;
     setCredentials({
       email,
       password,
     });
   };
   return (
-    <Container>
-      <Form onSubmit={handleSubmit}>
-        <Row>
+    <React.Fragment>
+      <div className="jumbotron">
+        <Container>
+          <h1 className="display-4">Welcome to North Star Lodge</h1>
+          <hr className="my-4" />
+          <p className="lead">Please sign-in with your credentials.</p>
+          <p>{credentials.email}</p>
+          <p>{credentials.password}</p>
+        </Container>
+      </div>
+      <Container className="w-50">
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="signIn">
             <Form.Label>Email Addrress</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
           </Form.Group>
-        </Row>
 
-        <Row>
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
-        </Row>
 
-        <Row>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" size="lg">
             Submit
           </Button>
-        </Row>
-      </Form>
-      <Row>
-        <div>
-          Credentials:
-          <div>{credentials.email}</div>
-          <div>{credentials.password}</div>
-        </div>
-      </Row>
-    </Container>
+        </Form>
+      </Container>
+    </React.Fragment>
   );
 };
 
