@@ -9243,6 +9243,13 @@ react-hook-form@^5.7.2:
   resolved "https://binrepo.target.com/artifactory/api/npm/npms/react-hook-form/-/react-hook-form-5.7.2.tgz#a84e259e5d37dd30949af4f79c4dac31101b79ac"
   integrity sha1-qE4lnl033TCUmvT3nE2sMRAbeaw=
 
+react-icons@^3.10.0:
+  version "3.10.0"
+  resolved "https://binrepo.target.com/artifactory/api/npm/npms/react-icons/-/react-icons-3.10.0.tgz#6c217a2dde2e8fa8d293210023914b123f317297"
+  integrity sha1-bCF6Ld4uj6jSkyEAI5FLEj8xcpc=
+  dependencies:
+    camelcase "^5.0.0"
+
 react-is@^16.12.0, react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://binrepo.target.com/artifactory/api/npm/npms/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
