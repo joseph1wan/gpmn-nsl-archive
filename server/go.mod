@@ -1,4 +1,4 @@
-module github.com/joseph1wan/gpmn-nsl/server
+module github.com/a2fumn2022/gpmn-nsl/server
 
 go 1.13
 
