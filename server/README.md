@@ -24,9 +24,9 @@ This is so you could run `go install` and then run the executables without havin
  [windows download](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads))
 2. Make a nsl_dev database `createdb nsl_dev`
     - You may need to switch your user to `postgres` by running `su - postgres`
-3. Install the [migrate](https://github.com/golang-migrate/migrate) and migrate the database to the latest state
-    1. `go get github.com/golang-migrate/migrate`
-    2. `migrate -source file://sql_migrations -database postgres://localhost:5432/nsl_dev up`
+3. Install the [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate) and migrate the database to the latest state
+    - There are instructions on how to install [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate) on its github page
+    - If you are using Windows Powershell, you will need [Scoop](https://scoop.sh/). Directions are at bottom of the page to install Scoop
 4. Seed (ie: fill) the database with test data (WIP)
 
 In order to make changes to the database, use the migrate tool to create new migration files
