@@ -4,6 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import App from './App';
 import SignInScreen from './components/authentication/SignInScreen';
 
+import Maintenance from './components/maintenance';
+
 const Routes = () => {
   return (
     <div>
@@ -14,8 +16,8 @@ const Routes = () => {
         <Route path="/sign-in">
           <SignInScreen />
         </Route>
-        <Route path="/test" title="Test Page">
-          <div>sup</div>
+        <Route path="/maintenance">
+          <Maintenance />
         </Route>
       </Switch>
     </div>
