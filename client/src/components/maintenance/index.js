@@ -1,3 +1,1 @@
-import Maintenance from './Maintenance';
-
-export default Maintenance;
+export { default } from './Maintenance';
