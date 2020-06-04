@@ -1,7 +1,8 @@
 import React from 'react';
+import Table from '../table';
 
 const Maintenance = () => {
-  return <div>Nathan made this</div>;
+  return <Table />;
 };
 
 export default Maintenance;
