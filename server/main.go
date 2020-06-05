@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"strconv"
-
+	"fmt"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/inmemory"
 	"github.com/gin-gonic/gin"
@@ -14,6 +14,10 @@ import (
 
 type ServerConfig struct {
 	Port int `yaml:"port"`
+	Host string `yaml:"host"`
+	User string `yaml: "user"`
+	Password string `yaml: "password"`
+	Dbname string `yaml: "dbname"`
 }
 
 type App struct {
@@ -30,9 +34,10 @@ func main() {
 
 	app := NewApp()
 
+	fmt.Println(app)
 	r := gin.Default()
 
-	r.POST("/login", app.Login)
+	//r.POST("/login", app.Login)
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
