@@ -1,4 +1,5 @@
-CREATE TABLE public.nsl_maintenance
+CREATE TABLE
+IF NOT EXISTS public.nsl_maintenance
 (
     id int,
     request varchar,

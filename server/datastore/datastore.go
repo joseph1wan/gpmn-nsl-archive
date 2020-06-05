@@ -1,6 +1,8 @@
 package datastore
 
-import "time"
+import (
+	"time"
+)
 
 type DB interface {
 	Init() error
