@@ -24,6 +24,7 @@ type App struct {
 	db datastore.DB
 }
 
+// Run the application
 func main() {
 	configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
 	config, err := ReadConfig(*configFile)
@@ -37,8 +38,12 @@ func main() {
 	fmt.Println(app)
 	r := gin.Default()
 
-	//r.POST("/login", app.Login)
+	/* POST endpoint that calls app's Login function defined in auth.go */
+	// r.POST("/login", app.Login)
 
+	/* GET endpoint that calls app's ___ function defined in maintenance.go */
+	  // <-- Implementation here. -->
+	
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
 	//authorized.GET("/", func(c *gin.Context) {
@@ -52,6 +57,7 @@ func main() {
 	r.Run(":" + strconv.Itoa(config.Port))
 }
 
+// Creates the app that holds all the functions to interact with the DB
 func NewApp() App {
 	app := App{
 		db: &inmemory.InMemory{},
@@ -64,12 +70,14 @@ func NewApp() App {
 	return app
 }
 
+// Read the config.yml file
 func ReadConfig(file string) (*ServerConfig, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
+	// Create a ServerConfig struct and read file info into the struct
 	var config ServerConfig
 	yaml.Unmarshal(data, &config)
 
