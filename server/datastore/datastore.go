@@ -8,19 +8,22 @@ import (
 are defined in the psql package */
 type DB interface {
 	/* Implement the Init() function that connects to the postgres DB */
-	Init() error // Modify this function
+	Init() error // Modify this function, see below
 
-	/* Instructions */
+	/* Init should take the config.yml file loaded in main.go as a parameter.
+	*  Use a structe (like in auth.go) to validate the fields defined in
+	*  config.yml. */
 
-	  /* Create a config variable to store your postgres credentials and connection
-	  options. Should use variables from the config.yml file loaded in main.go
-	  (so you need to pass that into Init) */
+	/* Using the fields in config.yml, create a pgx config variable to store your
+	*  postgres credentials and connection options. */
 
-	  /* Connect to the postgres DB using pgx and return the connection so that the
-	  app can call this interface to connect to the DB */
+	/* Connect to the postgres DB using the pgx config variable, and store the
+	*  connection in a variable that can be used by other functions (defined in
+	*  the psql package) to interact with the postgres database. */
+
 }
 
-// Struct to represent the maintenance_request table
+// MaintenanceRequest models the maintenance_request table
 type MaintenanceRequest struct {
 	ID            int
 	Request       string

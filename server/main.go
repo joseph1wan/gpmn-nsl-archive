@@ -57,10 +57,10 @@ func main() {
 	r.Run(":" + strconv.Itoa(config.Port))
 }
 
-// Creates the app that holds all the functions to interact with the DB
+// NewApp creates the app that holds all the functions to interact with the DB
 func NewApp() App {
 	app := App{
-		db: &inmemory.InMemory{},
+		db: &inmemory.InMemory{}, // Uses an InMemory database. To be replaced by datastore.DB
 	}
 	err := app.db.Init()
 	if err != nil {
