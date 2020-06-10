@@ -4,11 +4,11 @@ import (
 	"flag"
 	"io/ioutil"
 	"log"
-	"strconv"
 	"fmt"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
-	"github.com/a2fumn2022/gpmn-nsl/server/datastore/inmemory"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
+	"strconv"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -35,14 +35,25 @@ func main() {
 
 	app := NewApp()
 
-	fmt.Println(app)
+	/* Example connection */
+
+	// Create struct to hold data
+	var request datastore.MaintenanceRequest
+	// Connect to the database and run query
+	app.db.Connection().QueryRow(`select * from nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
+	// Print to test
+	fmt.Println(request.ID)
+	fmt.Println(request.Request)
+	fmt.Println(request.UserSubmitted)
+	fmt.Println(request.DateSubmitted)
+
 	r := gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	// r.POST("/login", app.Login)
+	r.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
-	  // <-- Implementation here. -->
+	  // r.GET("/maintenance_requests", app.AllMaintenanceRequests())
 	
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
@@ -60,9 +71,10 @@ func main() {
 // NewApp creates the app that holds all the functions to interact with the DB
 func NewApp() App {
 	app := App{
-		db: &inmemory.InMemory{}, // Uses an InMemory database. To be replaced by datastore.DB
+    db: &psql.DataBase{},
 	}
 	err := app.db.Init()
+	fmt.Println(err)
 	if err != nil {
 		log.Fatal("could not initialize database")
 	}

@@ -2,17 +2,18 @@
 package main
 
 import(
-	// Import the necessary packages
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 )
 
 /* AllMaintenanceRequests returns all the maintenance_requests from the database
 *  AllMaintenanceRequests is a function of app */
 func (app *app) AllMaintenanceRequests() {
-	// AllMaintenanceRequests takes a gin context as a parameter */
+	/* Get data using psql.AllMaintenanceRequests and pass in app.db for the
+	* connection */
 
-	/* Use the psql package to fetch the requests. You will need to provide the
-	*  initialized DB (see NewApp() in main.go) as a parameter to the psql 
-	*  function */
+	/* Takes the data returned in the psql func and formats it to a valid format
+	* using the gin.H func. See if it you can just use a Struct */
 
-	// Using the gin.JSON() function, return the requests in a valid JSON format
+	/* Use the gin.context.JSON func to return a status and the data. See auth.go
+	* for an example */
 }
