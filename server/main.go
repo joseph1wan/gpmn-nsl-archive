@@ -1,7 +1,7 @@
 package main
 
 import (
-	"flag"
+	//"flag"
 	"io/ioutil"
 	"log"
 	"fmt"
@@ -26,21 +26,23 @@ type App struct {
 
 // Run the application
 func main() {
-	configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
-	config, err := ReadConfig(*configFile)
+	//configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
+	config, err := ReadConfig("config.yaml")
 	if err != nil {
 		log.Fatalf("Could not configure server, %v", err)
 		return
 	}
-
+	fmt.Println("Read configfile")
 	app := NewApp()
-
 	/* Example connection */
 
 	// Create struct to hold data
 	var request datastore.MaintenanceRequest
+
 	// Connect to the database and run query
-	app.db.Connection().QueryRow(`select * from nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
+	fmt.Println("Trying to connect to database")
+	app.db.Connection().QueryRow(`select * from public.nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
+	fmt.Println("Connected")
 	// Print to test
 	fmt.Println(request.ID)
 	fmt.Println(request.Request)
@@ -50,11 +52,12 @@ func main() {
 	r := gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	r.POST("/login", app.Login)
+	// TODO:
+	// FIX: r.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	  // r.GET("/maintenance_requests", app.AllMaintenanceRequests())
-	
+
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
 	//authorized.GET("/", func(c *gin.Context) {
@@ -71,7 +74,7 @@ func main() {
 // NewApp creates the app that holds all the functions to interact with the DB
 func NewApp() App {
 	app := App{
-    db: &psql.DataBase{},
+    db: &psql.DB{},
 	}
 	err := app.db.Init()
 	fmt.Println(err)
