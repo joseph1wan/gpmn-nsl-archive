@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"flag"
+	"flag"
 	"io/ioutil"
 	"log"
 	"fmt"
@@ -12,13 +12,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-type ServerConfig struct {
-	Port int `yaml:"port"`
-	Host string `yaml:"host"`
-	User string `yaml: "user"`
-	Password string `yaml: "password"`
-	Dbname string `yaml: "dbname"`
-}
+
 
 type App struct {
 	db datastore.DB
@@ -26,14 +20,14 @@ type App struct {
 
 // Run the application
 func main() {
-	//configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
-	config, err := ReadConfig("config.yaml")
+	configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
+	config, err := ReadConfig(*configFile)
 	if err != nil {
 		log.Fatalf("Could not configure server, %v", err)
 		return
 	}
 	fmt.Println("Read configfile")
-	app := NewApp()
+	app := NewApp(config)
 	/* Example connection */
 
 	// Create struct to hold data
@@ -53,7 +47,7 @@ func main() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	// TODO:
-	// FIX: r.POST("/login", app.Login)
+	//r.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	  // r.GET("/maintenance_requests", app.AllMaintenanceRequests())
@@ -72,11 +66,11 @@ func main() {
 }
 
 // NewApp creates the app that holds all the functions to interact with the DB
-func NewApp() App {
+func NewApp(config *datastore.ServerConfig) App {
 	app := App{
     db: &psql.DB{},
 	}
-	err := app.db.Init()
+	err := app.db.Init(config)
 	fmt.Println(err)
 	if err != nil {
 		log.Fatal("could not initialize database")
@@ -86,14 +80,14 @@ func NewApp() App {
 }
 
 // Read the config.yml file
-func ReadConfig(file string) (*ServerConfig, error) {
+func ReadConfig(file string) (*datastore.ServerConfig, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
 	// Create a ServerConfig struct and read file info into the struct
-	var config ServerConfig
+	var config datastore.ServerConfig
 	yaml.Unmarshal(data, &config)
 
 	if config.Port == 0 {
