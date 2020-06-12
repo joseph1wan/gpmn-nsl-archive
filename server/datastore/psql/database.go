@@ -9,9 +9,8 @@ import (
 type DB struct {
 	Conn *pgx.Conn
 }
-
 /* Init establishes a reusable connection */
-func (db *DB) Init(config *datastore.ServerConfig) (error) {
+func (db *DB) Init(config *datastore.DatabaseConfig) (error) {
 	connConfig := pgx.ConnConfig{
 		User:              config.User,
 		Password:          config.Password,
@@ -22,10 +21,10 @@ func (db *DB) Init(config *datastore.ServerConfig) (error) {
 		UseFallbackTLS:    false,
 		FallbackTLSConfig: nil,
 	}
-	conn, err := pgx.Connect(connConfig)
+	connection, err := pgx.Connect(connConfig)
 	if err != nil {
 		return err
 	}
-	db.Conn = conn
+	db.Conn = connection
 	return nil
 }

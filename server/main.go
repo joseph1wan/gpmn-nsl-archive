@@ -12,7 +12,10 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-
+type ServerConfig struct {
+	Port int `yaml:"port"`
+	DBConfig datastore.DatabaseConfig `yaml:database`
+}
 
 type App struct {
 	db datastore.DB
@@ -69,7 +72,7 @@ func main() {
 
 // NewApp creates the app that holds all the functions to interact with the DB
 
-func NewApp(config *datastore.ServerConfig) App {
+func NewApp(config *datastore.DatabaseConfig) App {
 	app := App{
     db: &psql.DB{},
 	}
@@ -82,14 +85,14 @@ func NewApp(config *datastore.ServerConfig) App {
 }
 
 // Read the config.yml file
-func ReadConfig(file string) (*datastore.ServerConfig, error) {
+func ReadConfig(file string) (*datastore.DatabaseConfig, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
 	// Create a ServerConfig struct and read file info into the struct
-	var config datastore.ServerConfig
+	var config datastore.DatabaseConfig
 	yaml.Unmarshal(data, &config)
 
 	if config.Port == 0 {
