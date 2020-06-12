@@ -2,21 +2,24 @@ package main
 
 import (
 	"flag"
-	"io/ioutil"
-	"log"
 	"fmt"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
-	"strconv"
 	yaml "gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
+	"strconv"
 )
 
+<<<<<<< HEAD
 type ServerConfig struct {
 	Port int `yaml:"port"`
 	DBConfig datastore.DatabaseConfig `yaml:database`
 }
 
+=======
+>>>>>>> 1d42b59b9e05b48406542a5aa2136618bf3ab152
 type App struct {
 	db datastore.DB
 }
@@ -30,32 +33,16 @@ func main() {
 		return
 	}
 	fmt.Println("Read configfile")
+
 	app := NewApp(config)
-	/* Example connection */
-
-	// Create struct to hold data
-	var request datastore.MaintenanceRequest
-
-	// Connect to the database and run query
-	fmt.Println("Trying to connect to database")
-	//TODO: Fix Connection()
-
-	app.db.Conn.QueryRow(`select * from public.nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
-	fmt.Println("Connected")
-	// Print to test
-	fmt.Println(request.ID)
-	fmt.Println(request.Request)
-	fmt.Println(request.UserSubmitted)
-	fmt.Println(request.DateSubmitted)
 
 	r := gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	// TODO:
-	//r.POST("/login", app.Login)
+	r.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
-	  // r.GET("/maintenance_requests", app.AllMaintenanceRequests())
+	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
@@ -74,7 +61,7 @@ func main() {
 
 func NewApp(config *datastore.DatabaseConfig) App {
 	app := App{
-    db: &psql.DB{},
+		db: &psql.DB{},
 	}
 	err := app.db.Init(config)
 	fmt.Println(err)

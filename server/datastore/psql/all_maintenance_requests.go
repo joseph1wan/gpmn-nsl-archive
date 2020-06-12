@@ -6,7 +6,7 @@ import(
 
 /* AllMaintenanceRequests performs a SQL query to fetch all rows in the
 *  maintenance_requests table */
-func AllMaintenanceRequests() {
+func (db *DB) AllMaintenanceRequests() {
 	/* AllMaintenanceRequests takes in a pgx connection as a parameter */
 
 	/* Using the pgx connection, run a SQL query to fetch all rows in the
