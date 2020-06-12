@@ -2,17 +2,15 @@ package main
 
 import (
 	"flag"
-	"io/ioutil"
-	"log"
 	"fmt"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
-	"strconv"
 	yaml "gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
+	"strconv"
 )
-
-
 
 type App struct {
 	db datastore.DB
@@ -36,7 +34,7 @@ func main() {
 	r.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
-	  // r.GET("/maintenance_requests", app.AllMaintenanceRequests())
+	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
@@ -55,7 +53,7 @@ func main() {
 
 func NewApp(config *datastore.ServerConfig) App {
 	app := App{
-    db: &psql.DB{},
+		db: &psql.DB{},
 	}
 	err := app.db.Init(config)
 	fmt.Println(err)

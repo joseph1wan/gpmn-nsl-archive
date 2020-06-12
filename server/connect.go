@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"github.com/jackc/pgx"
+	"os"
 )
 
 func main() {
