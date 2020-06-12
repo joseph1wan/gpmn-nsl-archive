@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS public.nsl_maintenance;
+DROP TABLE IF EXISTS maintenance_requests;
