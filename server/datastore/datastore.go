@@ -18,6 +18,5 @@ type MaintenanceRequest struct {
 	ID            int
 	Request       string
 	UserSubmitted int
-	DateSubmitted time.Time
+	DateSubmitted time.Date
 }
-
