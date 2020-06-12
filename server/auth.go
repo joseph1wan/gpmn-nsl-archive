@@ -36,17 +36,14 @@ type LoginRequest struct {
 
 /* Login authenticates the user and returns a user ID and a token
 *  Login is a function of app */
-func (app *app) Login(c *gin.context) {
-	// Read the request from the gin context
-	bytedata, err := ioutil.readall(c.request.body)
+func (app *App) Login(c *gin.Context) {
+	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	// Create a LoginRequest struct and read request info into the struct
 	var req LoginRequest
 	err = json.Unmarshal(byteData, &req)
-	// Perform error handling on the LoginRequest struct
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -58,9 +55,7 @@ func (app *app) Login(c *gin.context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "bad user/pw combo"})
 	}
 
-	// If the request is valid, grabs the user from the "database"
 	user := SimpleUserDB[req.Email]
 	token := base64.StdEncoding.EncodeToString([]byte(req.Email + ":" + req.Password))
-	// Return JSON to gin to pass to the client
 	c.JSON(http.StatusOK, gin.H{"userID": user.ID, "authToken": token})
 }

@@ -35,7 +35,9 @@ func main() {
 
 	// Connect to the database and run query
 	fmt.Println("Trying to connect to database")
-	app.db.Connection().QueryRow(`select * from public.nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
+	//TODO: Fix Connection()
+
+	app.db.Conn.QueryRow(`select * from public.nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
 	fmt.Println("Connected")
 	// Print to test
 	fmt.Println(request.ID)
@@ -66,6 +68,7 @@ func main() {
 }
 
 // NewApp creates the app that holds all the functions to interact with the DB
+
 func NewApp(config *datastore.ServerConfig) App {
 	app := App{
     db: &psql.DB{},
@@ -75,7 +78,6 @@ func NewApp(config *datastore.ServerConfig) App {
 	if err != nil {
 		log.Fatal("could not initialize database")
 	}
-
 	return app
 }
 

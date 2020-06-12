@@ -7,7 +7,7 @@ import (
 
 /* Create a Struct that implements datastore.DB*/
 type DB struct {
-	conn *pgx.Conn
+	Conn *pgx.Conn
 }
 
 /* Init establishes a reusable connection */
@@ -26,11 +26,6 @@ func (db *DB) Init(config *datastore.ServerConfig) (error) {
 	if err != nil {
 		return err
 	}
-	db.conn = conn
+	db.Conn = conn
 	return nil
-}
-
-/* Connection fetches an establish pgx connection */
-func (db *DB) Connection() (*pgx.Conn) {
-	return db.conn
 }
