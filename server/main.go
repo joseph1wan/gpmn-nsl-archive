@@ -12,14 +12,11 @@ import (
 	"strconv"
 )
 
-<<<<<<< HEAD
 type ServerConfig struct {
 	Port int `yaml:"port"`
 	DBConfig datastore.DatabaseConfig `yaml:database`
 }
 
-=======
->>>>>>> 1d42b59b9e05b48406542a5aa2136618bf3ab152
 type App struct {
 	db datastore.DB
 }

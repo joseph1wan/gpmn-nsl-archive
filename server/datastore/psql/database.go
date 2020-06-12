@@ -21,14 +21,10 @@ func (db *DB) Init(config *datastore.DatabaseConfig) (error) {
 		UseFallbackTLS:    false,
 		FallbackTLSConfig: nil,
 	}
-	connection, err := pgx.Connect(connConfig)
+	conn, err := pgx.Connect(connConfig)
 	if err != nil {
 		return err
 	}
-<<<<<<< HEAD
-	db.Conn = connection
-=======
 	db.Connection = conn
->>>>>>> 1d42b59b9e05b48406542a5aa2136618bf3ab152
 	return nil
 }
