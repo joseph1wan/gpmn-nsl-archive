@@ -22,16 +22,20 @@ var AuthorizedUsers gin.Accounts = gin.Accounts{
 	"john@guest.com": "guest",
 }
 
+// SimpleUserDB models a database. Users will be stored in a DB in the future
 var SimpleUserDB map[string]User = map[string]User{
 	"dan@admin.com":  {ID: 1, Email: "dan@admin.com", AccountType: "admin"},
 	"john@guest.com": {ID: 1, Email: "john@guest.com", AccountType: "guest"},
 }
 
+// LoginRequest requires login requests to have an email and password.
 type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
+/* Login authenticates the user and returns a user ID and a token
+*  Login is a function of app */
 func (app *App) Login(c *gin.Context) {
 	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
