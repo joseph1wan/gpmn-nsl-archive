@@ -13,8 +13,8 @@ import (
 )
 
 type ServerConfig struct {
-	Port int `yaml:"port"`
-	DBConfig datastore.DatabaseConfig `yaml:"database"`
+	Port 		int 						`yaml:"port"`
+	DBConfig 	datastore.DatabaseConfig 	`yaml:"database"`
 }
 
 type App struct {

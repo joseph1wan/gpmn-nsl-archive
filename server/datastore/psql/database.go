@@ -10,7 +10,7 @@ type DB struct {
 	connection *pgx.Conn
 }
 /* Init establishes a reusable connection */
-func (db *DB) Init(config *datastore.DatabaseConfig) (error) {
+func (db *DB) Init(config datastore.DatabaseConfig) (error) {
 	connConfig := pgx.ConnConfig{
 		User:              config.User,
 		Password:          config.Password,
