@@ -24,10 +24,6 @@ const SignInScreen = () => {
           <h1 className="display-4">Welcome to North Star Lodge</h1>
           <hr className="my-4" />
           <p className="lead">Please sign-in with your credentials.</p>
-          <code>
-            <p>{credentials.email}</p>
-            <p>{credentials.password}</p>
-          </code>
         </Container>
       </Jumbotron>
       {method === 'gp' ? (
