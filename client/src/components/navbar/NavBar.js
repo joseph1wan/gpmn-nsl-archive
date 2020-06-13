@@ -13,9 +13,12 @@ const NavBar = () => {
       <BSNavbar.Brand href="/">North Star Lodge</BSNavbar.Brand>
       <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
       <BSNavbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
+        <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/maintenance">Maintenance</Nav.Link>
+        </Nav>
+        <Nav className="ml-auto">
+          <Nav.Link href="/sign-out">Sign Out</Nav.Link>
         </Nav>
       </BSNavbar.Collapse>
     </BSNavbar>
