@@ -10,11 +10,11 @@ type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
 }
 type DatabaseConfig struct {
-	Port 		int 	`yaml:"port"`
-	Host 		string 	`yaml:"host"`
-	User 		string 	`yaml:"user"`
-	Password 	string 	`yaml:"password"`
-	Dbname 		string 	`yaml:"dbname"`
+	Port     int    `yaml:"port"`
+	Host     string `yaml:"host"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
+	Dbname   string `yaml:"dbname"`
 }
 
 // MaintenanceRequest models the maintenance_request table
