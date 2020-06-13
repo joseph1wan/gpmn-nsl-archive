@@ -14,7 +14,7 @@ import (
 
 type ServerConfig struct {
 	Port int `yaml:"port"`
-	DBConfig datastore.DatabaseConfig `yaml:database`
+	DBConfig datastore.DatabaseConfig `yaml:"database"`
 }
 
 type App struct {
@@ -56,11 +56,11 @@ func main() {
 
 // NewApp creates the app that holds all the functions to interact with the DB
 
-func NewApp(config *datastore.DatabaseConfig) App {
+func NewApp(config *ServerConfig) App {
 	app := App{
 		db: &psql.DB{},
 	}
-	err := app.db.Init(config)
+	err := app.db.Init(config.DBConfig)
 	fmt.Println(err)
 	if err != nil {
 		log.Fatal("could not initialize database")
@@ -69,14 +69,14 @@ func NewApp(config *datastore.DatabaseConfig) App {
 }
 
 // Read the config.yml file
-func ReadConfig(file string) (*datastore.DatabaseConfig, error) {
+func ReadConfig(file string) (*ServerConfig, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
 		return nil, err
 	}
 
 	// Create a ServerConfig struct and read file info into the struct
-	var config datastore.DatabaseConfig
+	var config ServerConfig
 	yaml.Unmarshal(data, &config)
 
 	if config.Port == 0 {
