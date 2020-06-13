@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table as BootstrapTable } from 'react-bootstrap';
 
-const Table = () => {
+const Table = (tableData) => {
   return (
     <BootstrapTable striped bordered hover>
       <thead>
