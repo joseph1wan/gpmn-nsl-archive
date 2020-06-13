@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Jumbotron } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import GPSignIn from './GPSignIn';
 import GuestSignIn from './GuestSignIn';
@@ -10,9 +10,12 @@ const SignInScreen = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const { handleSubmit, control } = useForm();
   const { method } = useLocation();
+  const history = useHistory();
 
   const onSubmit = (data) => {
     setCredentials(data);
+    localStorage.setItem('authorizationToken', 'authorized');
+    history.replace('/');
   };
   return (
     <React.Fragment>

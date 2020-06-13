@@ -3,12 +3,13 @@ import { Switch, Route } from 'react-router-dom';
 
 import App from './App';
 import SignInScreen from './components/authentication/SignInScreen';
-
+import NavBar from './components/navbar';
 import Maintenance from './components/maintenance';
 
 const Routes = () => {
   return (
     <div>
+      <NavBar />
       <Switch>
         <Route exact path="/">
           <App />

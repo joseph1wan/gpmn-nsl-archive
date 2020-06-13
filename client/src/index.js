@@ -9,7 +9,7 @@ import Routes from './Routes';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Container>
+      <Container fluid>
         <Routes />
       </Container>
     </BrowserRouter>
