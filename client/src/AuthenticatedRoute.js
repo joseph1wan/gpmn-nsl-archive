@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { useAuthenticationToken } from './hooks';
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
-  const token = localStorage.getItem('authorizationToken');
-  const isAuthenticated = !!token;
+  const [isAuthenticated] = useAuthenticationToken();
   return (
     <Route
       {...rest}

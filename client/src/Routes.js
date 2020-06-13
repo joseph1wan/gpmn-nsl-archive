@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import App from './App';
 import AuthenticatedRoute from './AuthenticatedRoute';
@@ -10,23 +10,28 @@ import Maintenance from './components/maintenance';
 
 const Routes = () => {
   return (
-    <div>
+    <React.Fragment>
       <NavBar />
+
       <Switch>
         <Route exact path="/">
           <App />
         </Route>
-        <Route path="/sign-in">
-          <SignInScreen />
-        </Route>
+
         <AuthenticatedRoute path="/maintenance">
           <Maintenance />
         </AuthenticatedRoute>
+
+        {/* Non-Authenticated Routes */}
+        <Route path="/sign-in">
+          <SignInScreen />
+        </Route>
+
         <Route path="/sign-out">
           <SignOutScreen />
         </Route>
       </Switch>
-    </div>
+    </React.Fragment>
   );
 };
 

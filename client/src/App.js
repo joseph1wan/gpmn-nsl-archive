@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Button, Jumbotron, Row, Col } from 'react-bootstrap';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import './App.scss';

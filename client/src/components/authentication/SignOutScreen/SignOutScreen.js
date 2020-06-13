@@ -7,7 +7,14 @@ const SignOutScreen = () => {
     localStorage.clear();
     history.replace('/');
   });
-  return <div>See ya! 👋</div>;
+  return (
+    <div>
+      See ya!{' '}
+      <span role="img" aria-label="wave goodbye">
+        👋
+      </span>
+    </div>
+  );
 };
 
 export default SignOutScreen;
