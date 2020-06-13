@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Container, Jumbotron } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useLocation, useHistory } from 'react-router-dom';
@@ -14,6 +15,16 @@ const SignInScreen = () => {
 
   const onSubmit = (data) => {
     setCredentials(data);
+    axios
+      .post('/login', credentials)
+      .then((response) => {
+        const { token } = response;
+        localStorage.setItem('authorizationToken', token);
+        history.replace('/');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     localStorage.setItem('authorizationToken', 'authorized');
     history.replace('/');
   };
