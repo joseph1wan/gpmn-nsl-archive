@@ -17,26 +17,36 @@ const mockTableData = [
     lastName: '',
     userName: '@twitter',
   },
+  {
+    firstName: 'Bird',
+    lastName: '',
+    userName: '@twitter',
+  },
 ];
 
-const Table = (tableData = mockTableData) => {
+const Table = (tableData) => {
+  tableData = mockTableData;
+  const model = tableData[0];
+
+  const keyList = Object.keys(model);
+
   return (
     <BootstrapTable striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          {keyList.map((column) => (
+            <th>{column}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
         {tableData.map((request, index) => (
           <tr>
             <td>{index}</td>
-            <td>{request.firstName}</td>
-            <td>{request.lastName}</td>
-            <td>{request.userName}</td>
+            {keyList.map((column) => (
+              <td>{request[column]}</td>
+            ))}
           </tr>
         ))}
       </tbody>
