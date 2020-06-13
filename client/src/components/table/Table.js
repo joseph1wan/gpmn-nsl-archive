@@ -43,7 +43,7 @@ const Table = (tableData) => {
       <tbody>
         {tableData.map((request, index) => (
           <tr>
-            <td>{index}</td>
+            <td>{index + 1}</td>
             {keyList.map((column) => (
               <td>{request[column]}</td>
             ))}
