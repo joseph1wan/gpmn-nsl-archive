@@ -2,19 +2,13 @@ import React, { useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import App from './App';
+import AuthenticatedRoute from './AuthenticatedRoute';
 import SignInScreen from './components/authentication/SignInScreen';
 import SignOutScreen from './components/authentication/SignOutScreen';
 import NavBar from './components/navbar';
 import Maintenance from './components/maintenance';
 
 const Routes = () => {
-  const history = useHistory();
-  useEffect(() => {
-    const token = localStorage.getItem('authorizationToken');
-    if (token === null) {
-      history.replace('/');
-    }
-  });
   return (
     <div>
       <NavBar />
@@ -25,9 +19,9 @@ const Routes = () => {
         <Route path="/sign-in">
           <SignInScreen />
         </Route>
-        <Route path="/maintenance">
+        <AuthenticatedRoute path="/maintenance">
           <Maintenance />
-        </Route>
+        </AuthenticatedRoute>
         <Route path="/sign-out">
           <SignOutScreen />
         </Route>
