@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import App from './App';
 import SignInScreen from './components/authentication/SignInScreen';
+import SignOutScreen from './components/authentication/SignOutScreen';
 import NavBar from './components/navbar';
 import Maintenance from './components/maintenance';
 
@@ -19,6 +20,9 @@ const Routes = () => {
         </Route>
         <Route path="/maintenance">
           <Maintenance />
+        </Route>
+        <Route path="/sign-out">
+          <SignOutScreen />
         </Route>
       </Switch>
     </div>
