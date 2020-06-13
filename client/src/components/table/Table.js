@@ -1,35 +1,54 @@
 import React from 'react';
 import { Table as BootstrapTable } from 'react-bootstrap';
 
+const mockTableData = [
+  {
+    firstName: 'Mark',
+    lastName: 'Otto',
+    userName: '@mdo',
+  },
+  {
+    firstName: 'Jacob',
+    lastName: 'Thornton',
+    userName: '@fat',
+  },
+  {
+    firstName: 'Larry the Bird',
+    lastName: '',
+    userName: '@twitter',
+  },
+  {
+    firstName: 'Bird',
+    lastName: '',
+    userName: '@twitter',
+  },
+];
+
 const Table = (tableData) => {
+  tableData = mockTableData;
+  const model = tableData[0];
+
+  const keyList = Object.keys(model);
+
   return (
     <BootstrapTable striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          {keyList.map((column) => (
+            <th>{column}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {tableData.map((request, index) => (
+          <tr>
+            <td>{index}</td>
+            {keyList.map((column) => (
+              <td>{request[column]}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </BootstrapTable>
   );
