@@ -1,7 +1,25 @@
 import React from 'react';
 import { Table as BootstrapTable } from 'react-bootstrap';
 
-const Table = (tableData) => {
+const mockTableData = [
+  {
+    firstName: 'Mark',
+    lastName: 'Otto',
+    userName: '@mdo',
+  },
+  {
+    firstName: 'Jacob',
+    lastName: 'Thornton',
+    userName: '@fat',
+  },
+  {
+    firstName: 'Larry the Bird',
+    lastName: '',
+    userName: '@twitter',
+  },
+];
+
+const Table = (tableData = mockTableData) => {
   return (
     <BootstrapTable striped bordered hover>
       <thead>
@@ -13,23 +31,14 @@ const Table = (tableData) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {tableData.map((request, index) => (
+          <tr>
+            <td>{index}</td>
+            <td>{request.firstName}</td>
+            <td>{request.lastName}</td>
+            <td>{request.userName}</td>
+          </tr>
+        ))}
       </tbody>
     </BootstrapTable>
   );
