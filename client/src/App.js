@@ -2,17 +2,9 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Container, Button, Jumbotron, Row, Col } from 'react-bootstrap';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import logo from './assets/logo.svg';
 import './App.scss';
 
 const App = () => {
-  const history = useHistory();
-  useEffect(() => {
-    const token = localStorage.getItem('authorizationToken');
-    // if (!!token) {
-    //   history.replace('/maintenance');
-    // }
-  });
   return (
     <div className="App">
       <Jumbotron className="px-3 mb-0" fluid>

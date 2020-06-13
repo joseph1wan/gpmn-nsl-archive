@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import App from './App';
 import SignInScreen from './components/authentication/SignInScreen';
@@ -8,6 +8,13 @@ import NavBar from './components/navbar';
 import Maintenance from './components/maintenance';
 
 const Routes = () => {
+  const history = useHistory();
+  useEffect(() => {
+    const token = localStorage.getItem('authorizationToken');
+    if (token === null) {
+      history.replace('/');
+    }
+  });
   return (
     <div>
       <NavBar />
