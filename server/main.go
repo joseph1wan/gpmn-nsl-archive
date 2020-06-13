@@ -29,8 +29,6 @@ func main() {
 		log.Fatalf("Could not configure server, %v", err)
 		return
 	}
-	fmt.Println("Read configfile")
-
 	app := NewApp(config)
 
 	r := gin.Default()
@@ -61,7 +59,6 @@ func NewApp(config *ServerConfig) App {
 		db: &psql.DB{},
 	}
 	err := app.db.Init(config.DBConfig)
-	fmt.Println(err)
 	if err != nil {
 		log.Fatal("could not initialize database")
 	}
