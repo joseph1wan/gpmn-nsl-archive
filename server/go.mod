@@ -7,5 +7,6 @@ require (
 	github.com/golang-migrate/migrate v3.5.4+incompatible
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jackc/pgx/v4 v4.6.0 // indirect
+	github.com/stretchr/testify v1.5.1
 	gopkg.in/yaml.v2 v2.2.8
 )
