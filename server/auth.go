@@ -53,6 +53,7 @@ func (app *App) Login(c *gin.Context) {
 		return
 	} else if pw != req.Password {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "bad user/pw combo"})
+		return
 	}
 
 	user := SimpleUserDB[req.Email]

@@ -18,7 +18,9 @@ type ServerConfig struct {
 }
 
 type App struct {
-	db datastore.DB
+	conf   ServerConfig
+	db     datastore.DB
+	server *gin.Engine
 }
 
 // Run the application
@@ -31,10 +33,15 @@ func main() {
 	}
 	app := NewApp(config)
 
-	r := gin.Default()
+	app.setupRoutes()
+	app.Start()
+}
+
+func (app *App) setupRoutes() {
+	app.server = gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	r.POST("/login", app.Login)
+	app.server.POST("/login", app.Login)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
@@ -48,15 +55,17 @@ func main() {
 	//	id := SimpleUserDB[user].ID
 	//	...
 	//})
+}
 
-	r.Run(":" + strconv.Itoa(config.Port))
+func (app *App) Start() {
+	app.server.Run(":" + strconv.Itoa(app.conf.Port))
 }
 
 // NewApp creates the app that holds all the functions to interact with the DB
-
 func NewApp(config *ServerConfig) App {
 	app := App{
-		db: &psql.DB{},
+		conf: *config,
+		db:   &psql.DB{},
 	}
 	err := app.db.Init(config.DBConfig)
 	if err != nil {
