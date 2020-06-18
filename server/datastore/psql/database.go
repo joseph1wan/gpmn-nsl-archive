@@ -1,3 +1,4 @@
+// The psql package handles all interactions with the database.
 package psql
 
 import (
@@ -5,12 +6,13 @@ import (
 	"github.com/jackc/pgx"
 )
 
-/* Create a Struct that implements datastore.DB*/
+// DB holds a live connection to the database.
+// DB functions use the connection to query the database.
 type DB struct {
 	connection *pgx.Conn
 }
 
-/* Init establishes a reusable connection */
+// Init establishes a reusable connection.
 func (db *DB) Init(config datastore.DatabaseConfig) error {
 	connConfig := pgx.ConnConfig{
 		User:              config.User,
