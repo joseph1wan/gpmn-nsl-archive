@@ -8,6 +8,8 @@ import (
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
+	CreateMaintenanceRequests(request string, userID int, time time.Time) error
+	AllMaintenanceRequests() error
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`
