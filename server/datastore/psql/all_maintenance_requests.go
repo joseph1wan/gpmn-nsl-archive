@@ -13,4 +13,26 @@ func (db *DB) AllMaintenanceRequests() {
 	 */
 
 	/* Return the data as-is */
+		var dbRequest datastore.MaintenanceRequest
+
+    row, err := db.connection.Query("SELECT * FROM maintenance_requests")
+    if err != nil {
+        return err
+    }
+
+    for row.Next() {
+        err := row.Scan(&dbRequest.ID, 
+        &dbRequest.Request, 
+        &dbRequest.UserSubmitted, 
+        &dbRequest.DateSubmitted)
+        if err != nil {
+            return err
+        }
+        fmt.Println(dbRequest.ID, 
+        dbRequest.Request, 
+        dbRequest.UserSubmitted, 
+        dbRequest.DateSubmitted)
+    }
+    row.Close()
+    return nil
 }

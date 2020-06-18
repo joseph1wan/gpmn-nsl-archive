@@ -2,11 +2,12 @@
 package main
 
 import (
+	"fmt"
+	"time"
 	"flag"
 	"io/ioutil"
 	"log"
 	"strconv"
-
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
@@ -33,7 +34,11 @@ func main() {
 		return
 	}
 	app := NewApp(config)
-
+	// Begin TEST CASES
+	fmt.Println(app.db.AllMaintenanceRequests())
+	app.db.CreateMaintenanceRequests("play spikeball", 105, time.Now())
+	fmt.Println(app.db.AllMaintenanceRequests())
+	// End TEST CASES
 	app.setupRoutes()
 	app.Start()
 }
