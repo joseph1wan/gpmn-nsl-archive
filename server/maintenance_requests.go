@@ -2,11 +2,11 @@
 package main
 
 import(
-	//"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
-	//"github.com/gin-gonic/gin"
-	//"io/ioutil"
-	//"encoding/base64"
-	//"encoding/json"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
+	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"encoding/base64"
+	"encoding/json"
 )
 
 /* AllMaintenanceRequests returns all the maintenance_requests from the database
@@ -22,10 +22,10 @@ func (app *App) AllMaintenanceRequests() {
 	* for an example */
 }
 
-/*func (app *app) CreateMaintenanceRequests(c *gin.Context) {
+func (app *app) CreateMaintenanceRequests(c *gin.Context) {
 	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-}*/
+}
