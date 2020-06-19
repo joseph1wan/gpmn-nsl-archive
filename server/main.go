@@ -42,7 +42,7 @@ func (app *App) setupRoutes() {
 	app.server = gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	app.server.GET("/login", app.Login)
+	app.server.POST("/login", app.Login)
 
 	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
 

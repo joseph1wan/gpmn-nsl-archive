@@ -4,7 +4,7 @@ package datastore
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	//AllMaintenanceRequests()
+	AllMaintenanceRequests()
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`
