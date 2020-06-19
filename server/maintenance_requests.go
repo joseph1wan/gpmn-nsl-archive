@@ -3,15 +3,18 @@ package main
 
 import(
 	"github.com/gin-gonic/gin"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
+	"time"
 	"io/ioutil"
 	"net/http"
-	"time"
 	"encoding/json"
 )
 
-type CreateRequest struct {
+/*type CreateRequest struct {
 	Request string `json:"request"`
-}
+	UserSubmitted int `json:"id"`
+	DateSubmitted time.Time `json:"date"`
+}*/
 
 /* AllMaintenanceRequests returns all the maintenance_requests from the database
 *  AllMaintenanceRequests is a function of app */
@@ -32,18 +35,18 @@ func (app *App) CreateMaintenanceRequests(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	var req CreateRequest
-	err = json.Unmarshal(byteData, &req)
+	var newRequest datastore.MaintenanceRequest
+	err = json.Unmarshal(byteData, &newRequest)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	userID := 101 // hard coded user ID for now. I don't know how or where to read in a user ID
-	newID, err := app.db.CreateMaintenanceRequests(req.Request, userID, time.Now()) // either parse time here to mm/dd/y format or in CreateMaintenanceRequests()
+	newRequest.DateSubmitted = time.Now() //hard coded time submitted for now
+	newRequest.UserSubmitted = 101 // hard coded user ID for now. I don't know how or where to read in a user ID
+	req, err := app.db.CreateMaintenanceRequests(newRequest)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 	return
 	}
-	c.JSON(http.StatusOK, gin.H{"id": newID})
+	c.JSON(http.StatusOK, gin.H{"id": req.ID})
 }
