@@ -1,14 +1,10 @@
 package datastore
 
-import (
-	"github.com/jackc/pgx"
-)
-
 /* DB is an interface for the app database. Any struct used as the app database
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	Connection() *pgx.Conn
+	//AllMaintenanceRequests()
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`

@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -33,29 +32,21 @@ func main() {
 		return
 	}
 	app := NewApp(config)
-
 	app.setupRoutes()
 	app.Start()
-	var request datastore.MaintenanceRequest
-	fmt.Println("--------------------------------------------------------")
-	fmt.Println("Trying to connect to database")
-	app.db.Connection().QueryRow(`select * from public.nsl_maintenance where id = 1`).Scan(&request.ID, &request.Request, &request.UserSubmitted, &request.DateSubmitted)
-	fmt.Println(request.ID)
-	fmt.Println(request.Request)
-	fmt.Println(request.UserSubmitted)
-	fmt.Println(request.DateSubmitted)
-	fmt.Println("--------------------------------------------------------")
-	psql.AllMaintenanceRequests(app.db.Connection())
+
+	//	psql.Mainte(app.db.Connection())
 }
 
 func (app *App) setupRoutes() {
 	app.server = gin.Default()
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
-	//app.server.POST("/login", app.Login)
+	app.server.GET("/login", app.Login)
 
-	/* GET endpoint that calls app's ___ function defined in maintenance.go */
-	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
+	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
+
+	//r.GET("/maintenance_requests", app.GetMaintenanceRequests)
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
