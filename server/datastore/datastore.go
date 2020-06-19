@@ -8,7 +8,7 @@ import (
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	CreateMaintenanceRequests(request string, userID int, time time.Time) error
+	CreateMaintenanceRequests(request string, userID int, time time.Time) (int, error)
 	AllMaintenanceRequests() error
 }
 type DatabaseConfig struct {

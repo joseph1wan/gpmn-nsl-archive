@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"time"
 	"flag"
 	"io/ioutil"
 	"log"
@@ -33,11 +31,6 @@ func main() {
 		return
 	}
 	app := NewApp(config)
-	// Begin TEST CASES
-	fmt.Println(app.db.AllMaintenanceRequests())
-	app.db.CreateMaintenanceRequests("play spikeball", 105, time.Now())
-	fmt.Println(app.db.AllMaintenanceRequests())
-	// End TEST CASES
 	app.setupRoutes()
 	app.Start()
 }
@@ -50,7 +43,7 @@ func (app *App) setupRoutes() {
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
-
+	app.server.POST("/createmr", app.CreateMaintenanceRequests)
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
 	//authorized.GET("/", func(c *gin.Context) {

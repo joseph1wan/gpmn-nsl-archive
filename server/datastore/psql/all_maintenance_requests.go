@@ -1,7 +1,6 @@
 package psql
 
 import (
-	// Import the necessary packages
 	"fmt"
     "github.com/a2fumn2022/gpmn-nsl/server/datastore"
 )
@@ -17,7 +16,7 @@ func (db *DB) AllMaintenanceRequests() error {
 	*/
 
 	/* Return the data as-is */
-		var dbRequest datastore.MaintenanceRequest
+	var dbRequest datastore.MaintenanceRequest
 
     row, err := db.connection.Query("SELECT * FROM maintenance_requests")
     if err != nil {
