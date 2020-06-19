@@ -19,6 +19,5 @@ type MaintenanceRequest struct {
 	ID            int
 	Request       string
 	UserSubmitted int
-	//DateSubmitted time.Time    May need to change if things are read in time.Time
-	DateSubmitted string
+	DateSubmitted time.Time    May need to change if things are read in time.Time
 }
