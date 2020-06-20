@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"strconv"
+
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
@@ -57,7 +58,7 @@ func (app *App) setupRoutes() {
 }
 
 func (app *App) Start() {
-	app.server.Run(":" + strconv.Itoa(app.conf.Port))
+	app.server.Run("localhost:" + strconv.Itoa(app.conf.Port))
 }
 
 // NewApp creates a new app with an initialized database.
