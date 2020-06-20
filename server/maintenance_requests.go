@@ -12,15 +12,8 @@ import (
 *  AllMaintenanceRequests is a function of app */
 func (app *App) GetMaintenanceRequests(c *gin.Context) {
 
-	//byteData, err := ioutil.ReadAll(c.Request.Body)
-
 	var req = app.db.AllMaintenanceRequests()
-	/*	err = json.Unmarshal(byteData, &req)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-			return
-		}
-	*/
+
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": req})
 
 	fmt.Println("maintenance_requests: ", app.db.AllMaintenanceRequests())
