@@ -40,7 +40,7 @@ func (app *App) setupRoutes() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
-	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequests)
+	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
