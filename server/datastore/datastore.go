@@ -1,10 +1,12 @@
 package datastore
 
+import "time"
+
 /* DB is an interface for the app database. Any struct used as the app database
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	AllMaintenanceRequests()
+	AllMaintenanceRequests() []MaintenanceRequest
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`
@@ -19,5 +21,6 @@ type MaintenanceRequest struct {
 	ID            int
 	Request       string
 	UserSubmitted int
-	DateSubmitted time.Time    May need to change if things are read in time.Time
+	DateSubmitted time.Time //May need to change if things are read in time.Time
+	//DateSubmitted string
 }
