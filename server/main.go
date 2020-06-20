@@ -33,7 +33,6 @@ func main() {
 		return
 	}
 	app := NewApp(config)
-
 	app.setupRoutes()
 	app.Start()
 }
@@ -43,10 +42,10 @@ func (app *App) setupRoutes() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
+	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())
-
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
 	//authorized.GET("/", func(c *gin.Context) {
@@ -59,7 +58,7 @@ func (app *App) setupRoutes() {
 }
 
 func (app *App) Start() {
-	app.server.Run(":" + strconv.Itoa(app.conf.Port))
+	app.server.Run("localhost:" + strconv.Itoa(app.conf.Port))
 }
 
 // NewApp creates a new app with an initialized database.

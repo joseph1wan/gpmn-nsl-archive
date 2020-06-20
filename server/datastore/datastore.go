@@ -10,6 +10,7 @@ import (
 // Any Struct used as the app database must implement these functions.
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
+	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
 }
 
 // DatbaseConfig models the fields needed to connect to the database.
