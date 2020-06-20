@@ -41,12 +41,16 @@ func (app *App) CreateMaintenanceRequests(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	if newRequest.Request == "" {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Request field is empty or missing and is needed"})
+		return
+	}
 	newRequest.DateSubmitted = time.Now() //hard coded time submitted for now
 	newRequest.UserSubmitted = 101 // hard coded user ID for now. I don't know how or where to read in a user ID
 	req, err := app.db.CreateMaintenanceRequests(newRequest)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-	return
+		return
 	}
 	c.JSON(http.StatusOK, gin.H{"id": req.ID})
 }
