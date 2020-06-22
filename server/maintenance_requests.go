@@ -12,15 +12,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetMaintenanceRequests returns all the maintenance_requests from the database
-// GetMainte
+// getMaintenanceRequests returns all the maintenance_requests from the database
 func (app *App) getMaintenanceRequests(c *gin.Context) {
-	requests, _ := app.db.AllMaintenanceRequests()
+	requests, err := app.db.AllMaintenanceRequests()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error!, Check to make sure your DB table is spelt correctly": err.Error()})
+		return
+	}
+	if requests == nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Possible error!": "Your Table is Empty"})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})
 }
 
-// AllMaintenanceRequests returns all the maintenance_requests from the database
-
+// CreateMaintenanceRequests creates a maintenance_request in the database
 func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
