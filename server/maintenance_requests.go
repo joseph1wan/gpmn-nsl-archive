@@ -2,26 +2,17 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-/* AllMaintenanceRequests returns all the maintenance_requests from the database
-*  AllMaintenanceRequests is a function of app */
-func (app *App) GetMaintenanceRequests(c *gin.Context) {
+// GetMaintenanceRequests returns all the maintenance_requests from the database
+// GetMainte
+func (app *App) getMaintenanceRequests(c *gin.Context) {
 
-	var req = app.db.AllMaintenanceRequests()
+	req, _ := app.db.Requests()
 
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": req})
 
-	fmt.Println("maintenance_requests: ", app.db.AllMaintenanceRequests())
-
-	// Take array and format it into JSON format for gin.H
-	// INSERT CODE HERE
-
-	// Use the gin.context.JSON func to return a status and the JSON data
-	//   Example: c.JSON(http.StatusOK, gin.H{"userID": user.ID, "authToken": token})
-	// INSERT CODE HERE
 }

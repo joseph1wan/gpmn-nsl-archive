@@ -3,5 +3,5 @@ database:
   port: 5432
   host: "localhost"
   user: "postgres"
-  password: "1234"
+  password: "summer2020"
   dbname: "nsl_dev"

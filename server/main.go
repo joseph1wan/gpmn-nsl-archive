@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -36,7 +35,6 @@ func main() {
 	app.setupRoutes()
 	app.Start()
 
-	//	psql.Mainte(app.db.Connection())
 }
 
 func (app *App) setupRoutes() {
@@ -44,9 +42,8 @@ func (app *App) setupRoutes() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
-	fmt.Println("before")
 
-	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
+	app.server.GET("/maintenance_requests", app.getMaintenanceRequests)
 
 	//r.GET("/maintenance_requests", app.GetMaintenanceRequests)
 

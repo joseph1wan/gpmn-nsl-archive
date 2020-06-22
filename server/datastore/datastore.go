@@ -6,7 +6,8 @@ import "time"
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	AllMaintenanceRequests() []MaintenanceRequest
+
+	Requests() ([]MaintenanceRequest, error) //Calls to the Requests method within maintenance_requests.go
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`
@@ -21,6 +22,5 @@ type MaintenanceRequest struct {
 	ID            int
 	Request       string
 	UserSubmitted int
-	DateSubmitted time.Time //May need to change if things are read in time.Time
-	//DateSubmitted string
+	DateSubmitted time.Time
 }
