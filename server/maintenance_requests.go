@@ -10,12 +10,6 @@ import(
 	"encoding/json"
 )
 
-/*type CreateRequest struct {
-	Request string `json:"request"`
-	UserSubmitted int `json:"id"`
-	DateSubmitted time.Time `json:"date"`
-}*/
-
 /* AllMaintenanceRequests returns all the maintenance_requests from the database
 *  AllMaintenanceRequests is a function of app */
 func (app *App) AllMaintenanceRequests(c *gin.Context) {
