@@ -7,8 +7,8 @@ import "time"
 // DB is an interface for the app database.
 // Any Struct used as the app database must implement these functions.
 type DB interface {
-	Init(config DatabaseConfig) error        // Initialize pgx connection
-	Requests() ([]MaintenanceRequest, error) //Calls to the Requests method within maintenance_requests.go
+	Init(config DatabaseConfig) error                      // Initialize pgx connection
+	AllMaintenanceRequests() ([]MaintenanceRequest, error) //Calls to the Requests method within maintenance_requests.go
 	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
 }
 

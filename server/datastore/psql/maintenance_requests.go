@@ -6,7 +6,7 @@ import (
 
 // Import the necessary packages
 
-func (db *DB) Requests() ([]datastore.MaintenanceRequest, error) {
+func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	var maintenanceRequestTable []datastore.MaintenanceRequest
 	rows, err := db.connection.Query("SELECT * FROM maintenance_requests LIMIT $1", 777) //Number limits # of requests, can be anything
 	if err != nil {

@@ -15,8 +15,8 @@ import (
 // GetMaintenanceRequests returns all the maintenance_requests from the database
 // GetMainte
 func (app *App) getMaintenanceRequests(c *gin.Context) {
-	req, _ := app.db.Requests()
-	c.JSON(http.StatusOK, gin.H{"maintenance_requests": req})
+	requests, _ := app.db.AllMaintenanceRequests()
+	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})
 }
 
 // AllMaintenanceRequests returns all the maintenance_requests from the database
