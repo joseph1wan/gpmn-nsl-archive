@@ -2,26 +2,48 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"time"
 
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/gin-gonic/gin"
 )
 
 /* AllMaintenanceRequests returns all the maintenance_requests from the database
 *  AllMaintenanceRequests is a function of app */
 func (app *App) GetMaintenanceRequests(c *gin.Context) {
-
 	var req = app.db.AllMaintenanceRequests()
-
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": req})
-
 	fmt.Println("maintenance_requests: ", app.db.AllMaintenanceRequests())
+}
 
-	// Take array and format it into JSON format for gin.H
-	// INSERT CODE HERE
+// AllMaintenanceRequests returns all the maintenance_requests from the database
 
-	// Use the gin.context.JSON func to return a status and the JSON data
-	//   Example: c.JSON(http.StatusOK, gin.H{"userID": user.ID, "authToken": token})
-	// INSERT CODE HERE
+func (app *App) CreateMaintenanceRequest(c *gin.Context) {
+	byteData, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	var newRequest datastore.MaintenanceRequest
+	err = json.Unmarshal(byteData, &newRequest)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if newRequest.Request == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Check that the request field is not blank or missing."})
+		return
+	}
+	newRequest.DateSubmitted = time.Now() //hard coded time submitted for now
+	newRequest.UserSubmitted = 101        // hard coded user ID for now. I don't know how or where to read in a user ID
+	req, err := app.db.CreateMaintenanceRequest(newRequest)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"id": req.ID})
 }

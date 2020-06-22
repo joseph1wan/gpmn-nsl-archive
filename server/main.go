@@ -1,8 +1,8 @@
+// Server provides the API for the North Star Lodge app.
 package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -13,6 +13,7 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+// ServerConfig models the config.yml configuration file
 type ServerConfig struct {
 	Port     int                      `yaml:"port"`
 	DBConfig datastore.DatabaseConfig `yaml:"database"`
@@ -24,7 +25,6 @@ type App struct {
 	server *gin.Engine
 }
 
-// Run the application
 func main() {
 	configFile := flag.String("config", "config.yaml", "Config file for nsl backend")
 	config, err := ReadConfig(*configFile)
@@ -44,11 +44,8 @@ func (app *App) setupRoutes() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
-	fmt.Println("before")
-
 	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
-
-	//r.GET("/maintenance_requests", app.GetMaintenanceRequests)
+	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
@@ -62,10 +59,10 @@ func (app *App) setupRoutes() {
 }
 
 func (app *App) Start() {
-	app.server.Run(":" + strconv.Itoa(app.conf.Port))
+	app.server.Run("localhost:" + strconv.Itoa(app.conf.Port))
 }
 
-// NewApp creates the app that holds all the functions to interact with the DB
+// NewApp creates a new app with an initialized database.
 func NewApp(config *ServerConfig) App {
 	app := App{
 		conf: *config,
@@ -78,7 +75,7 @@ func NewApp(config *ServerConfig) App {
 	return app
 }
 
-// Read the config.yml file
+// ReadConfig loads the server config.yml file into a usable Struct
 func ReadConfig(file string) (*ServerConfig, error) {
 	data, err := ioutil.ReadFile(file)
 	if err != nil {
