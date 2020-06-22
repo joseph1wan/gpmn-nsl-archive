@@ -16,7 +16,7 @@ import (
 func (app *App) GetMaintenanceRequests(c *gin.Context) {
 	requests, err := app.db.AllMaintenanceRequests()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error!, Check to make sure your DB table is spelt correctly": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})
