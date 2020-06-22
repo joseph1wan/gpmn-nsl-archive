@@ -4,11 +4,12 @@ import (
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 )
 
+//AllMaintenanceRequests creates and returns a slice of datatype MaintenanceRequest with possible errors
 func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	var maintenanceRequestTable []datastore.MaintenanceRequest
-	rows, err := db.connection.Query("SELECT * FROM maintenance_requests LIMIT $1", 777) //Number limits # of requests, can be anything
+	rows, err := db.connection.Query("SELECT * FROM maintenance_requests") //Number limits # of requests, can be anything
 	if err != nil {
-		return maintenanceRequestTable, err
+		return nil, err
 	}
 
 	defer rows.Close()

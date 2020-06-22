@@ -13,14 +13,10 @@ import (
 )
 
 // getMaintenanceRequests returns all the maintenance_requests from the database
-func (app *App) getMaintenanceRequests(c *gin.Context) {
+func (app *App) GetMaintenanceRequests(c *gin.Context) {
 	requests, err := app.db.AllMaintenanceRequests()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error!, Check to make sure your DB table is spelt correctly": err.Error()})
-		return
-	}
-	if requests == nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"Possible error!": "Your Table is Empty"})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})

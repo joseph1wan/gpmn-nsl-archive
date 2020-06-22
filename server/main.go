@@ -43,7 +43,7 @@ func (app *App) setupRoutes() {
 
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
-	app.server.GET("/maintenance_requests", app.getMaintenanceRequests)
+	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
 	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
