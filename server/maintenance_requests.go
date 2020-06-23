@@ -1,28 +1,26 @@
 // This file provides NewApp() with functions for maintenance requests
 package main
 
-import(
-	"github.com/gin-gonic/gin"
-	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
-	"time"
+import (
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"encoding/json"
+	"time"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
+	"github.com/gin-gonic/gin"
 )
 
-/* AllMaintenanceRequests returns all the maintenance_requests from the database
-*  AllMaintenanceRequests is a function of app */
-func (app *App) AllMaintenanceRequests(c *gin.Context) {
-	/* Get data using psql.AllMaintenanceRequests and pass in app.db for the
-	* connection */
-
-	/* Takes the data returned in the psql func and formats it to a valid format
-	* using the gin.H func. See if it you can just use a Struct */
-
-	/* Use the gin.context.JSON func to return a status and the data. See auth.go
-	* for an example */
+// GetMaintenanceRequests returns all the maintenance_requests from the database
+func (app *App) GetMaintenanceRequests(c *gin.Context) {
+	requests, err := app.db.AllMaintenanceRequests()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})
 }
 
+// CreateMaintenanceRequest creates a maintenance_request in the database
 func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
