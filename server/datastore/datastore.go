@@ -11,6 +11,7 @@ import (
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
 	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
+	DeleteMaintenanceRequest(id int) (int, error)
 }
 
 // DatbaseConfig models the fields needed to connect to the database.

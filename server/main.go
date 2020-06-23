@@ -43,6 +43,7 @@ func (app *App) setupRoutes() {
 	/* POST endpoint that calls app's Login function defined in auth.go */
 	app.server.POST("/login", app.Login)
 	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
+	app.server.DELETE("/maintenance_requests/:id", app.DeleteMaintenanceRequest)
 
 	/* GET endpoint that calls app's ___ function defined in maintenance.go */
 	// r.GET("/maintenance_requests", app.AllMaintenanceRequests())

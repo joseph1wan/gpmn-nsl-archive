@@ -8,6 +8,7 @@ import(
 	"io/ioutil"
 	"net/http"
 	"encoding/json"
+	"strconv"
 )
 
 /*type CreateRequest struct {
@@ -53,4 +54,14 @@ func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"id": req.ID})
+}
+
+func (app *App) DeleteMaintenanceRequest(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	deleted_id, err := app.db.DeleteMaintenanceRequest(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"id": deleted_id})
 }
