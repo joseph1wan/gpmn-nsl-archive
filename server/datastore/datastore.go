@@ -8,7 +8,7 @@ import (
 * must implement these functions */
 type DB interface {
 	Init(config DatabaseConfig) error // Initialize pgx connection
-	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
+	CreateMaintenanceRequest(request MaintenanceRequest) (*MaintenanceRequest, error)
 }
 type DatabaseConfig struct {
 	Port     int    `yaml:"port"`

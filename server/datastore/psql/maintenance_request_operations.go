@@ -12,5 +12,5 @@ func (db *DB) CreateMaintenanceRequest(request datastore.MaintenanceRequest) (*d
         return nil, err
     }
     request.ID = lastID
-    return request, nil
+    return &request, nil
 }
