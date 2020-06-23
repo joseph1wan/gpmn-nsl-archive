@@ -7,7 +7,7 @@ import (
 //AllMaintenanceRequests creates and returns a slice of datatype MaintenanceRequest with possible errors
 func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	var maintenanceRequestTable []datastore.MaintenanceRequest
-	rows, err := db.connection.Query("SELECT * FROM maintenance_requests") //Number limits # of requests, can be anything
+	rows, err := db.connection.Query("SELECT * FROM maintenance_requests")
 	if err != nil {
 		return nil, err
 	}
@@ -20,7 +20,7 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 		err = rows.Scan(&maintenance_request.ID, &maintenance_request.Request, &maintenance_request.UserSubmitted, &maintenance_request.DateSubmitted)
 		//get any errors before the first iteration, checks if DB table is spelt correctly
 		if err != nil {
-			return maintenanceRequestTable, err
+			return nil, err
 		}
 		// Add the new MaintenanceRequest to the existing array of MaintenanceRequests
 		maintenanceRequestTable = append(maintenanceRequestTable, maintenance_request)
@@ -28,7 +28,7 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	// get any error encountered during iteration
 	err = rows.Err()
 	if err != nil {
-		return maintenanceRequestTable, err
+		return nil, err
 	}
 	// Return my array of MaintenanceRequests
 	return maintenanceRequestTable, nil

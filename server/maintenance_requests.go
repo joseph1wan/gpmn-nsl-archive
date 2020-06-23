@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// getMaintenanceRequests returns all the maintenance_requests from the database
+// GetMaintenanceRequests returns all the maintenance_requests from the database
 func (app *App) GetMaintenanceRequests(c *gin.Context) {
 	requests, err := app.db.AllMaintenanceRequests()
 	if err != nil {
@@ -22,7 +22,7 @@ func (app *App) GetMaintenanceRequests(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"maintenance_requests": requests})
 }
 
-// CreateMaintenanceRequests creates a maintenance_request in the database
+// CreateMaintenanceRequest creates a maintenance_request in the database
 func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 	byteData, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
