@@ -15,15 +15,15 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	defer rows.Close()
 	for rows.Next() {
 		// Create a new MaintenanceRequest
-		var maintenance_request datastore.MaintenanceRequest
+		var maintenanceRequest datastore.MaintenanceRequest
 		// Scan the row values into MaintenanceRequest
-		err = rows.Scan(&maintenance_request.ID, &maintenance_request.Request, &maintenance_request.UserSubmitted, &maintenance_request.DateSubmitted)
+		err = rows.Scan(&maintenanceRequest.ID, &maintenanceRequest.Request, &maintenanceRequest.UserSubmitted, &maintenanceRequest.DateSubmitted)
 		//get any errors before the first iteration, checks if DB table is spelt correctly
 		if err != nil {
 			return nil, err
 		}
 		// Add the new MaintenanceRequest to the existing array of MaintenanceRequests
-		maintenanceRequestTable = append(maintenanceRequestTable, maintenance_request)
+		maintenanceRequestTable = append(maintenanceRequestTable, maintenanceRequest)
 	}
 	// get any error encountered during iteration
 	err = rows.Err()
