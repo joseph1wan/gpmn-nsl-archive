@@ -10,8 +10,6 @@ type DB interface {
 	Init(config DatabaseConfig) error
 	AllMaintenanceRequests() ([]MaintenanceRequest, error)
 	CreateMaintenanceRequest(request MaintenanceRequest) (*MaintenanceRequest, error)
-
-
 }
 
 // DatbaseConfig models the fields needed to connect to the database.

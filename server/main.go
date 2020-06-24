@@ -3,13 +3,13 @@ package main
 
 import (
 	"flag"
-	"io/ioutil"
-	"log"
-	"strconv"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore/psql"
 	"github.com/gin-gonic/gin"
 	yaml "gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
+	"strconv"
 )
 
 // ServerConfig models the config.yml configuration file

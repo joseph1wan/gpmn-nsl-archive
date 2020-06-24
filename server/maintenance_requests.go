@@ -3,11 +3,11 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
 	"time"
-	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
-	"github.com/gin-gonic/gin"
 )
 
 // GetMaintenanceRequests returns all the maintenance_requests from the database

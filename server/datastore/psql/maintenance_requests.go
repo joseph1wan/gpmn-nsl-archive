@@ -1,9 +1,10 @@
 package psql
 
 import (
-    "github.com/a2fumn2022/gpmn-nsl/server/datastore"
+	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 )
 
+//AllMaintenanceRequests creates and returns a slice of datatype MaintenanceRequest with possible errors
 func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	var maintenanceRequestTable []datastore.MaintenanceRequest
 	rows, err := db.connection.Query("SELECT * FROM maintenance_requests")
@@ -33,12 +34,12 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 }
 
 func (db *DB) CreateMaintenanceRequest(request datastore.MaintenanceRequest) (*datastore.MaintenanceRequest, error) {
-    var lastID int
-    err := db.connection.QueryRow("INSERT INTO maintenance_requests (request, user_submitted, date_submitted) VALUES ($1, $2, $3) RETURNING id",
-    request.Request, request.UserSubmitted, request.DateSubmitted).Scan(&lastID)
-    if err != nil {
-        return nil, err
-    }
-    request.ID = lastID
-    return &request, nil
+	var lastID int
+	err := db.connection.QueryRow("INSERT INTO maintenance_requests (request, user_submitted, date_submitted) VALUES ($1, $2, $3) RETURNING id",
+		request.Request, request.UserSubmitted, request.DateSubmitted).Scan(&lastID)
+	if err != nil {
+		return nil, err
+	}
+	request.ID = lastID
+	return &request, nil
 }
