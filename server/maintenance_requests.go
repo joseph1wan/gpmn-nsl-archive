@@ -55,8 +55,12 @@ func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"id": req.ID})
 }
 
+//DeleteMaintenanceRequest deletes a maintenance_request in the database
 func (app *App) DeleteMaintenanceRequest(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Check that the request field is not blank or missing."})
+	}
 	deleted_id, err := app.db.DeleteMaintenanceRequest(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
