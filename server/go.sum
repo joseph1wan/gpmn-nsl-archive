@@ -1,3 +1,5 @@
+github.com/a2fumn2022/gpmn-nsl v0.0.0-20200603231951-6ebdcce7f3c7 h1:z9Bn37HBaJiOMFYEkpClv0AMmvqW8p9r/adApsjJGDw=
+github.com/a2fumn2022/gpmn-nsl v0.0.0-20200618151648-2620ce9461b2 h1:ZMI9TD7fik60R1AgdvMonPYAE+3hWJD8PcOmZF9iJfo=
 github.com/cockroachdb/apd v1.1.0 h1:3LFP3629v+1aKXU5Q37mxmRxX/pIu1nijXydLShEq5I=
 github.com/cockroachdb/apd v1.1.0/go.mod h1:8Sl8LxpKi29FqWXR16WEFZRNSz3SoPzUzeMeY4+DwBQ=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
