@@ -59,7 +59,7 @@ func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 func (app *App) DeleteMaintenanceRequest(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Check that the request field is not blank or missing."})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Incorect or missing id."})
 	}
 	deleted_id, err := app.db.DeleteMaintenanceRequest(id)
 	if err != nil {
