@@ -3,14 +3,20 @@ package main
 
 import (
 	"encoding/json"
+	"strconv"
 	"io/ioutil"
-
 	"net/http"
 	"time"
 
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/gin-gonic/gin"
 )
+
+type CreateRequest struct {
+	Request string `json:"request"`
+	UserSubmitted int `json:"id"`
+	DateSubmitted time.Time `json:"date"`
+}
 
 // GetMaintenanceRequests returns all the maintenance_requests from the database
 func (app *App) GetMaintenanceRequests(c *gin.Context) {
@@ -47,4 +53,18 @@ func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"id": req.ID})
+}
+
+//DeleteMaintenanceRequest deletes a maintenance_request in the database
+func (app *App) DeleteMaintenanceRequest(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Incorect or missing id."})
+	}
+	deleted_id, err := app.db.DeleteMaintenanceRequest(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"id": deleted_id})
 }

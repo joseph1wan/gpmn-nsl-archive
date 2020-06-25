@@ -10,6 +10,7 @@ type DB interface {
 	Init(config DatabaseConfig) error
 	AllMaintenanceRequests() ([]MaintenanceRequest, error) //Calls to the Requests method within maintenance_requests.go
 	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
+	DeleteMaintenanceRequest(id int) (int, error)
 }
 
 // DatbaseConfig models the fields needed to connect to the database.

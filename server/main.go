@@ -45,6 +45,7 @@ func (app *App) setupRoutes() {
 	app.server.POST("/login", app.Login)
 	app.server.GET("/maintenance_requests", app.GetMaintenanceRequests)
 	app.server.POST("/maintenance_requests", app.CreateMaintenanceRequest)
+	app.server.DELETE("/maintenance_requests/:id", app.DeleteMaintenanceRequest)
 
 	// NOTE: To add a group of endpoints with an authorized user, see the following commented out code
 	//authorized := r.Group("/maintenance", gin.BasicAuth(AuthorizedUsers))
