@@ -8,8 +8,8 @@ import "time"
 // Any Struct used as the app database must implement these functions.
 type DB interface {
 	Init(config DatabaseConfig) error
-	AllMaintenanceRequests() ([]MaintenanceRequest, error) //Calls to the Requests method within maintenance_requests.go
-	CreateMaintenanceRequest(request MaintenanceRequest) (MaintenanceRequest, error)
+	AllMaintenanceRequests() ([]MaintenanceRequest, error)
+	CreateMaintenanceRequest(request MaintenanceRequest) (*MaintenanceRequest, error)
 }
 
 // DatbaseConfig models the fields needed to connect to the database.
