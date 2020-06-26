@@ -11,7 +11,6 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	defer rows.Close()
 	for rows.Next() {
 		// Create a new MaintenanceRequest
@@ -32,4 +31,15 @@ func (db *DB) AllMaintenanceRequests() ([]datastore.MaintenanceRequest, error) {
 	}
 	// Return my array of MaintenanceRequests
 	return maintenanceRequestTable, nil
+}
+
+func (db *DB) CreateMaintenanceRequest(request datastore.MaintenanceRequest) (*datastore.MaintenanceRequest, error) {
+	var lastID int
+	err := db.connection.QueryRow("INSERT INTO maintenance_requests (request, user_submitted, date_submitted) VALUES ($1, $2, $3) RETURNING id",
+		request.Request, request.UserSubmitted, request.DateSubmitted).Scan(&lastID)
+	if err != nil {
+		return nil, err
+	}
+	request.ID = lastID
+	return &request, nil
 }

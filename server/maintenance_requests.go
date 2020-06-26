@@ -3,13 +3,11 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
-
-	"net/http"
-	"time"
-
 	"github.com/a2fumn2022/gpmn-nsl/server/datastore"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"net/http"
+	"time"
 )
 
 // GetMaintenanceRequests returns all the maintenance_requests from the database
@@ -39,8 +37,8 @@ func (app *App) CreateMaintenanceRequest(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Check that the request field is not blank or missing."})
 		return
 	}
-	newRequest.DateSubmitted = time.Now() //hard coded time submitted for now
-	newRequest.UserSubmitted = 101        // hard coded user ID for now. I don't know how or where to read in a user ID
+	newRequest.DateSubmitted = time.Now()
+	newRequest.UserSubmitted = 101 // hard coded user ID for now
 	req, err := app.db.CreateMaintenanceRequest(newRequest)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
